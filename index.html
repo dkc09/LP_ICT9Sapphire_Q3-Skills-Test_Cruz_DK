@@ -60,10 +60,8 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-
         <div class="d-flex align-items-center">
             <a class="navbar-brand me-4" href="#">Fare Guide</a>
-
             <ul class="navbar-nav flex-row gap-3">
                 <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Fare Matrix</a></li>
@@ -76,7 +74,6 @@
             <a href="#" class="btn btn-outline-light btn-sm">Book Now</a>
             <a href="#" class="btn btn-light btn-sm">Create Account</a>
         </div>
-
     </div>
 </nav>
 
@@ -148,11 +145,10 @@
                 <input type="email" id="email" class="form-control" required>
             </div>
 
-          
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="terms">
                 <label class="form-check-label">
-                    I accept the <a href="https://www.w3schools.com/about/about_copyright.asp" target="_blank">Terms of Use</a>
+                    I accept the Terms of Use
                 </label>
             </div>
 
@@ -164,14 +160,36 @@
 
         </form>
 
-        <div class="mt-4" id="output"></div>
-
     </div>
 </div>
 
 <footer>
     Cruz, Don Kylie D. | 9 Sapphire ©2026
 </footer>
+
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header" style="background-color:#6b4f3b; color:white;">
+        <h5 class="modal-title">Account Created Successfully</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body" id="modalContent">
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-earth" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 
@@ -192,7 +210,6 @@
 
         let termsAccepted = document.getElementById("terms").checked;
 
-    
         if (!termsAccepted) {
             alert("You must accept the Terms of Use before registering.");
             return;
@@ -216,17 +233,18 @@
             fareCategory = "Senior Citizen Fare";
         }
 
-        document.getElementById("output").innerHTML =
-            "<div class='alert alert-success'>" +
-            "<h4>Registration Successful!</h4>" +
+        document.getElementById("modalContent").innerHTML =
             "<p><strong>Username:</strong> " + username + "</p>" +
             "<p><strong>Name:</strong> " + fullName + "</p>" +
             "<p><strong>Fare Category:</strong> " + fareCategory + "</p>" +
-            "<p><strong>Adult:</strong> " + isAdult + "</p>" +
-            "</div>";
+            "<p><strong>Adult:</strong> " + isAdult + "</p>";
+
+        let myModal = new bootstrap.Modal(document.getElementById('successModal'));
+        myModal.show();
     }
 
 </script>
 
 </body>
 </html>
+
