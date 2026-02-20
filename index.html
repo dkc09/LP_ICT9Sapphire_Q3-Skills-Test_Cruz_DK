@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q3 Skills Test</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4efe6;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #6b4f3b;
+        }
+
+        .navbar a {
+            color: rgb(197, 189, 189) !important;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-earth {
+            background-color: #8b6f47;
+            color: white;
+        }
+
+        .btn-earth:hover {
+            background-color: #6b4f3b;
+        }
+
+        .profile-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #8b6f47;
+            display: block;
+            margin: 0 auto 15px auto;
+        }
+
+        footer {
+            background-color: #6b4f3b;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+
+        <div class="d-flex align-items-center">
+            <a class="navbar-brand me-4" href="#">Fare Guide</a>
+
+            <ul class="navbar-nav flex-row gap-3">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Fare Matrix</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Schedule</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://www.w3schools.com/" target="_blank">Help</a></li>
+            </ul>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a href="#" class="btn btn-outline-light btn-sm">Book Now</a>
+            <a href="#" class="btn btn-light btn-sm">Create Account</a>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="form-container col-md-6 mx-auto">
+
+        <h1 class="text-center">Fare Guide Registration</h1>
+
+        <p class="text-center">
+            Fill out the form below to register.
+        </p>
+
+        <img id="profileImage"
+             src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+             alt="Profile Logo"
+             class="profile-preview">
+
+        <form>
+
+            <div class="mb-3">
+                <label class="form-label">Upload Photo</label>
+                <input type="file"
+                       class="form-control"
+                       accept="image/*"
+                       onchange="previewImage(event)">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" id="username" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" required>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" onclick="togglePassword()">
+                <label class="form-check-label">Show Password</label>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">First Name</label>
+                <input type="text" id="firstName" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text" id="lastName" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Age</label>
+                <input type="number" id="age" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Contact Number</label>
+                <input type="text"
+                       id="contact"
+                       class="form-control"
+                       required
+                       oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+
+          
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="terms">
+                <label class="form-check-label">
+                    I accept the <a href="https://www.w3schools.com/about/about_copyright.asp" target="_blank">Terms of Use</a>
+                </label>
+            </div>
+
+            <button type="button"
+                    class="btn btn-earth w-100"
+                    onclick="submitForm()">
+                Create My Account
+            </button>
+
+        </form>
+
+        <div class="mt-4" id="output"></div>
+
+    </div>
+</div>
+
+<footer>
+    Cruz, Don Kylie D. | 9 Sapphire ©2026
+</footer>
+
+<script>
+
+    function previewImage(event) {
+        let reader = new FileReader();
+        reader.onload = function() {
+            document.getElementById('profileImage').src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function togglePassword() {
+        let passwordField = document.getElementById("password");
+        passwordField.type = passwordField.type === "password" ? "text" : "password";
+    }
+
+    function submitForm() {
+
+        let termsAccepted = document.getElementById("terms").checked;
+
+    
+        if (!termsAccepted) {
+            alert("You must accept the Terms of Use before registering.");
+            return;
+        }
+
+        let username = document.getElementById("username").value;
+        let firstName = document.getElementById("firstName").value; 
+        let lastName = document.getElementById("lastName").value;   
+        let age = Number(document.getElementById("age").value);     
+
+        let fullName = firstName + " " + lastName; 
+        let isAdult = age >= 18; 
+
+        let fareCategory;
+
+        if (age < 13) {
+            fareCategory = "Child Fare";
+        } else if (age >= 13 && age < 60) {
+            fareCategory = "Regular Fare";
+        } else {
+            fareCategory = "Senior Citizen Fare";
+        }
+
+        document.getElementById("output").innerHTML =
+            "<div class='alert alert-success'>" +
+            "<h4>Registration Successful!</h4>" +
+            "<p><strong>Username:</strong> " + username + "</p>" +
+            "<p><strong>Name:</strong> " + fullName + "</p>" +
+            "<p><strong>Fare Category:</strong> " + fareCategory + "</p>" +
+            "<p><strong>Adult:</strong> " + isAdult + "</p>" +
+            "</div>";
+    }
+
+</script>
+
+</body>
+</html>
